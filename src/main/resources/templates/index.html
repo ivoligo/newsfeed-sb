@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Лента новостей</title>
+</head>
+<body>
+  <table>
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>Название</th>
+        <th>Дата публикации</th>
+        <th>Содержание</th>
+        <th>Категория</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${#lists.isEmpty(newsFeed)}">
+      <td colspan="2">Новостей нет. Добавьте новость</td>
+    </tr>
+      <tr th:each="news : ${newsFeed}">
+        <td th:text = "${news.id}"></td>
+        <td th:text = "${news.title}"></td>
+        <td th:text = "${news.date}"></td>
+        <td th:text = "${news.content}"></td>
+        <td>
+          <li th:each="category : ${news.category}">
+            <span th:text = "${category.name}"></span>
+          </li>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
