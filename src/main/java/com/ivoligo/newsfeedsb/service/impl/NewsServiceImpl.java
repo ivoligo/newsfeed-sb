@@ -1,24 +1,31 @@
-package org.ivoligo.newsfeedsb.service.impl;
+package com.ivoligo.newsfeedsb.service.impl;
 
-import org.ivoligo.newsfeedsb.model.dto.NewsDto;
-import org.ivoligo.newsfeedsb.model.dto.NewsFilter;
-import org.ivoligo.newsfeedsb.model.entity.Category;
-import org.ivoligo.newsfeedsb.model.entity.News;
-import org.ivoligo.newsfeedsb.repository.NewsRepository;
-import org.ivoligo.newsfeedsb.service.NewsService;
+import com.ivoligo.newsfeedsb.model.dto.NewsDto;
+import com.ivoligo.newsfeedsb.model.dto.NewsFilter;
+import com.ivoligo.newsfeedsb.model.entity.Category;
+import com.ivoligo.newsfeedsb.model.entity.News;
+import com.ivoligo.newsfeedsb.repository.NewsRepository;
+import com.ivoligo.newsfeedsb.service.CategoryService;
+import com.ivoligo.newsfeedsb.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class NewsServiceImpl implements NewsService {
 
     private final NewsRepository newsRepository;
+    private final CategoryService categoryService;
 
-    public NewsServiceImpl(@Autowired NewsRepository newsRepository) {
+    public NewsServiceImpl(@Autowired NewsRepository newsRepository, CategoryService categoryService) {
         this.newsRepository = newsRepository;
+        this.categoryService = categoryService;
     }
 
     @Override
@@ -36,8 +43,21 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public void delete(NewsDto newsDto) {
+    public void delete(Long id) {
 
+        var news = newsRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Пользователь с id: " + id + " не найден "));
+        newsRepository.delete(news);
+    }
+
+    @Override
+    public NewsDto getById(Long id) {
+
+        var news = newsRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Пользователь с id: " + id + " не найден "));
+
+        var test = convert(news);
+        return test;
     }
 
     @Override
@@ -47,6 +67,17 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public void create(NewsDto newsDto) {
+        var news = new News();
+        news.setTittle(newsDto.getTittle());
+        news.setContent(newsDto.getContent());
+        news.setDate(new Timestamp(System.currentTimeMillis()).toLocalDateTime());
+        var categories = new ArrayList<Category>();
+        for (String categoryName:newsDto.getCategory()) {
+            var category = categoryService.getByName(categoryName);
+            categories.add(category);
+        }
+        news.setCategories(categories);
+        newsRepository.save(news);
 
     }
 
@@ -54,8 +85,9 @@ public class NewsServiceImpl implements NewsService {
         //todo: использовать builder ?
         NewsDto newsDto = new NewsDto();
         newsDto.setId(news.getId());
-        newsDto.setTitle(news.getTitle());
+        newsDto.setTittle(news.getTittle());
         newsDto.setContent(news.getContent());
+        newsDto.setDate(news.getDate().toString());
         newsDto.setCategory(convert(news.getCategories()));
         return newsDto;
     }

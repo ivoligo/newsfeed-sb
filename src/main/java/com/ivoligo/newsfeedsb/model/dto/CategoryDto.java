@@ -1,4 +1,4 @@
-package org.ivoligo.newsfeedsb.model.dto;
+package com.ivoligo.newsfeedsb.model.dto;
 
 public class CategoryDto {
 

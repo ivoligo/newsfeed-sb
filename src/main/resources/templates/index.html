@@ -21,17 +21,27 @@
     </tr>
       <tr th:each="news : ${newsFeed}">
         <td th:text = "${news.id}"></td>
-        <td th:text = "${news.title}"></td>
+        <td th:text = "${news.tittle}"></td>
         <td th:text = "${news.date}"></td>
         <td th:text = "${news.content}"></td>
         <td>
-          <li th:each="category : ${news.category}">
-            <span th:text = "${category.name}"></span>
+          <li th:each="category : ${news.getCategory()}">
+            <span th:text = "${category}"></span>
           </li>
+        </td>
+        <td>
+<!--          <a th:href="@{/edit/{id}(id=${news.getId()})}">Изменить</a>-->
+          <form action="#" th:action="@{/edit/{id}(id=${news.getId()})}">
+            <input type = "submit" value="Изменить">
+          </form>
+          <form action="#" th:action="@{/delete/{id}(id=${news.getId()})}">
+            <input type = "submit" value="Удалить">
+          </form>
         </td>
 
       </tr>
     </tbody>
   </table>
+  <p><a href="/add">Добавить новость.</a></p>
 </body>
 </html>

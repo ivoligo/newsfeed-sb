@@ -1,11 +1,11 @@
-package org.ivoligo.newsfeedsb.model.dto;
+package com.ivoligo.newsfeedsb.model.dto;
 
 import java.util.List;
 
 public class NewsDto {
 
     private Long id;
-    private String title;
+    private String tittle;
     private String content;
     private String date;
     private List<String> categories;
@@ -18,12 +18,12 @@ public class NewsDto {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getTittle() {
+        return tittle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTittle(String title) {
+        this.tittle = title;
     }
 
     public String getContent() {
@@ -46,7 +46,7 @@ public class NewsDto {
         return categories;
     }
 
-    public void setCategory(List<String> category) {
-        this.categories = category;
+    public void setCategory(List<String> categories) {
+        this.categories = categories;
     }
 }

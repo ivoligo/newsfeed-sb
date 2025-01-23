@@ -1,4 +1,4 @@
-package org.ivoligo.newsfeedsb.model.entity;
+package com.ivoligo.newsfeedsb.model.entity;
 
 import javax.persistence.*;
 

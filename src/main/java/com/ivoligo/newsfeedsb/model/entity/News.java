@@ -1,7 +1,11 @@
-package org.ivoligo.newsfeedsb.model.entity;
+package com.ivoligo.newsfeedsb.model.entity;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -14,12 +18,12 @@ public class News {
     @Column(name = "id")
     private Long id;
     @Column(name = "tittle")
-    private String title;
+    private String tittle;
     @Column(name = "content")
     private String content;
     @Column(name = "date")
-    private Date date;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private LocalDateTime date;
+    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, fetch = FetchType.LAZY)
     @JoinTable(name = "news_category",
     joinColumns = @JoinColumn(name = "news_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
@@ -36,12 +40,12 @@ public class News {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getTittle() {
+        return tittle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTittle(String tittle) {
+        this.tittle = tittle;
     }
 
     public String getContent() {
@@ -52,11 +56,11 @@ public class News {
         this.content = content;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

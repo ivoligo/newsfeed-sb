@@ -5,6 +5,28 @@
     <title>Title</title>
 </head>
 <body>
+    <form action="#" th:action="@{/add}" th:object="${news}" method="post">
+        <table>
+            <tr>
+                <td><label>Название</label></td>
+                <td><input required type="text" field="*{tittle}" name="tittle"></td>
+            </tr>
+            <tr>
+                <td><label>Содержание</label></td>
+                <td><input required type="text" field="*{content}" name="content"></td>
+            </tr>
+            <tr>
+                <td><label>Категория</label></td>
+                <td>
+                    <select required field="*{categories}" name="categories" multiple>
+                        <option th:each="categoryName : ${categories}" th:value="${categoryName}" th:text="${categoryName}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <input type = "submit" value="Опубликовать">
+    </form>
 
 </body>
 </html>

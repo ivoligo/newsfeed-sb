@@ -2,9 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Изменение новости</title>
 </head>
 <body>
-
+    <form action="#" th:action="@{/update/{id}(id=${news.getId()})}" th:object="${news}" method="post">
+<!--        <input type="hidden" name="id" th:field="*{id}">-->
+        <table>
+            <tr>
+                <td><label>Название</label></td>
+                <td><input required type="text" th:field="*{tittle}" name="tittle"></td>
+            </tr>
+            <tr>
+                <td><label>Содержание</label></td>
+                <td><input required type="text" th:field="*{content}" name="content"></td>
+            </tr>
+            <tr>
+                <td><label>Категория</label></td>
+                <td>
+                    <select required field="*{categories}" name="categories" multiple>
+                        <option th:each="categoryName : ${categories}" th:value="${categoryName}" th:text="${categoryName}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Изменить новость">
+    </form>
 </body>
 </html>
