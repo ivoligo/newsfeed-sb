@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1737629449286-1
+      author: OLIvanov
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - dropForeignKeyConstraint:
+            baseColumnNames: news_id
+            baseTableName: news_category
+            constraintName: fk_newcat_on_news
+            referencedColumnNames: id
+            referencedTableName: news
+  - changeSet:
+        id: 1737629449286-2
+        author: OLIvanov
+        objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+        changes:
+            - addForeignKeyConstraint:
+                  baseColumnNames: news_id
+                  baseTableName: news_category
+                  constraintName: fk_newcat_on_news
+                  onDelete: CASCADE
+                  onUpdate: CASCADE
+                  referencedColumnNames: id
+                  referencedTableName: news

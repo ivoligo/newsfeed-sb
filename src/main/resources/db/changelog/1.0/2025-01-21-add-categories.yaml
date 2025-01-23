@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1737456257-1
+      author: OLIvanov
+      changes:
+        - insert:
+            tableName: category
+            columns:
+              - column:
+                  name: name
+                  value: "ИТ"
+        - insert:
+            tableName: category
+            columns:
+              - column:
+                  name: name
+                  value: "наука"
+        - insert:
+            tableName: category
+            columns:
+              - column:
+                  name: name
+                  value: "экономика"
+        - insert:
+            tableName: category
+            columns:
+              - column:
+                  name: name
+                  value: "спорт"

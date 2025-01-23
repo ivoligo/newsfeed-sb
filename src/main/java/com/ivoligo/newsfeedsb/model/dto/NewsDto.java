@@ -1,7 +1,5 @@
 package org.ivoligo.newsfeedsb.model.dto;
 
-import org.ivoligo.newsfeedsb.model.entity.Category;
-
 import java.util.List;
 
 public class NewsDto {

@@ -1,6 +1,6 @@
 package org.ivoligo.newsfeedsb.model.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.util.Date;
 import java.util.List;
@@ -11,9 +11,13 @@ public class News {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+    @Column(name = "tittle")
     private String title;
+    @Column(name = "content")
     private String content;
+    @Column(name = "date")
     private Date date;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "news_category",

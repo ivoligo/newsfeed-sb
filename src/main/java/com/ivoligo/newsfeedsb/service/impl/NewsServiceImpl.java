@@ -1,6 +1,5 @@
 package org.ivoligo.newsfeedsb.service.impl;
 
-import org.ivoligo.newsfeedsb.model.dto.CategoryDto;
 import org.ivoligo.newsfeedsb.model.dto.NewsDto;
 import org.ivoligo.newsfeedsb.model.dto.NewsFilter;
 import org.ivoligo.newsfeedsb.model.entity.Category;
@@ -10,8 +9,6 @@ import org.ivoligo.newsfeedsb.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
